@@ -1,0 +1,28 @@
+Problem Link - https://leetcode.com/problems/valid-anagram/
+
+Solution 
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        map<char,int>mp1,mp2;
+        int ss=s.size();
+        int ts=t.size();
+        if(ss!=ts)
+            return false;
+        for(int i=0;i<ss;++i)
+        {
+            if(mp1.count(s[i]))
+                mp1[s[i]]++;
+            else
+                mp1.insert(pair<char,int>(s[i],1));
+            if(mp2.count(t[i]))
+                mp2[t[i]]++;
+            else
+                mp2.insert(pair<char,int>(t[i],1));
+        }
+        if(mp1==mp2)
+            return true;
+        return false;
+    }
+};
