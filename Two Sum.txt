@@ -1,0 +1,40 @@
+Problem Link - https://leetcode.com/problems/two-sum/
+
+Solution 
+
+#include<map>
+#include<iterator>
+using namespace std;
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> answer;
+        map<int,int>m;
+        int n=nums.size();
+        for(int i=0;i<n;++i)
+        {
+            m.insert(pair<int,int>(nums[i],i));
+        }
+        map<int,int>::iterator it;
+        for(it=m.begin();it!=m.end();++it)
+        {
+            int t=(it->first);
+            int tmp=target-t;
+            if(m.find(tmp)!=m.end())
+            {
+                answer.push_back(it->second);
+                answer.push_back(m[tmp]);
+                break;
+            }
+        }
+        if(answer[0]==answer[1])
+        {
+            for(int i=0;i<n;++i)
+            {
+                if((nums[i]==nums[answer[0]]) && (i!=answer[0]))
+                    answer[1]=i;
+            }
+        }
+        return answer;
+    }
+};
