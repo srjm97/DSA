@@ -1,0 +1,38 @@
+Problem Link - https://leetcode.com/problems/unique-paths/description/
+
+Solution 
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        int answer=1;
+        m--,n--;
+        vector<int>numerator;
+        int a=max(m,n);
+        for(int i=a+1;i<=(m+n);++i)
+            numerator.push_back(i);
+        if(a==m)
+            m=1;
+        else if(a==n)
+            n=1;
+        a=max(m,n);
+        for(int i=2;i<=a;++i)
+        {
+            int t=i;
+            int j=0;
+            while(j<numerator.size() && t>1)
+            {
+                int g=__gcd(t,numerator[j]);
+                numerator[j]/=g;
+                t/=g;
+                ++j;
+            }
+            for(int p:numerator)
+                cout<<p<<" ";
+            cout<<endl;
+        }
+        for(int p:numerator)
+            answer*=p;
+        return answer;
+    }
+};
