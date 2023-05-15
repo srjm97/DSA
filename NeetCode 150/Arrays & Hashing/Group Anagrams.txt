@@ -1,0 +1,32 @@
+Problem Link - https://leetcode.com/problems/group-anagrams/
+
+Solution
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> answer;
+        vector<string>temp;
+        set<string> uset;
+        int n=strs.size();
+        for(int i=0;i<n;++i)
+        {
+            string t=strs[i];
+            sort(t.begin(),t.end());
+            temp.push_back(t);
+            uset.insert(t);
+        }
+        for(auto it=uset.begin();it!=uset.end();++it)
+        {
+            string t=*it;
+            vector<string>panswer;
+            for(int i=0;i<n;++i)
+            {
+                if(t==temp[i])
+                    panswer.push_back(strs[i]);
+            }
+            answer.push_back(panswer);
+        }
+        return answer;
+    }
+};
