@@ -1,0 +1,41 @@
+Problem Link - https://leetcode.com/problems/valid-sudoku/description/
+
+
+Solution
+
+
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        bool answer=true;
+        unordered_map<int,vector<vector<int>>>m;
+        for(int i=0;i<9;++i)
+        {
+            for(int j=0;j<9;++j)
+            {
+                if(board[i][j]!='.')
+                {
+                    int t=stoi(to_string(board[i][j]))-48;
+                    int r=i/3;
+                    int c=j/3;
+                    int box=3*r+c;
+                    m[t].push_back({i,j,box});
+                }
+            }
+        }
+        for(auto itr=m.begin();itr!=m.end();++itr)
+        {
+            vector<vector<int>>temp=itr->second;
+            for(int i=0;i<3;++i)
+            {
+                set<int>check;
+                for(int j=0;j<temp.size();++j)
+                    check.insert(temp[j][i]);
+                if(check.size()!=temp.size())
+                    return false;
+                check.clear();
+            }
+        }
+        return answer;
+    }
+};
