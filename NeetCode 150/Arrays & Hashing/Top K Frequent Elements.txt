@@ -1,0 +1,29 @@
+Problem Link - https://leetcode.com/problems/top-k-frequent-elements/description/
+
+Solution
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<int> answer;
+        vector<vector<int>>buckets(nums.size()+1);
+        int n=nums.size();
+        unordered_map<int,int>m;
+        for(int i=0;i<n;++i)
+            m[nums[i]]++;
+        for(auto itr=m.begin();itr!=m.end();++itr)
+            buckets[itr->second].push_back(itr->first);
+        int i=n;
+        while(k>0)
+        {
+            if(buckets[i].size()>0)
+            {
+                k-=buckets[i].size();
+                for(int p:buckets[i])
+                    answer.push_back(p);
+            }
+            --i;
+        }
+        return answer;
+    }
+};
