@@ -1,0 +1,35 @@
+Problem Link - https://leetcode.com/problems/evaluate-reverse-polish-notation/description/
+
+Solution
+
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        int answer;
+        int n=tokens.size();
+        stack<int>st;
+        for(int i=0;i<n;++i)
+        {
+            if(tokens[i]=="+" || tokens[i]=="-" || tokens[i]=="*" || tokens[i]=="/" )
+            {
+                string op=tokens[i];
+                int b=st.top();
+                st.pop();
+                int a=st.top();
+                st.pop();
+                if(op=="+")
+                    st.push(a+b);
+                else if(op=="-")
+                    st.push(a-b);
+                else if(op=="*")
+                    st.push(a*b);
+                else
+                    st.push(a/b);
+            }
+            else
+                st.push(stoi(tokens[i]));
+        }
+        answer=st.top();
+        return answer;
+    }
+};
