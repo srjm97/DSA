@@ -1,0 +1,35 @@
+Problem Link - https://leetcode.com/problems/longest-repeating-character-replacement/description/
+
+Solution
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int answer=0;
+        int l=0,r=0;
+        map<char,int>m;
+        int n=s.size();
+        while(r<n)
+        {
+            m[s[r]]++;
+            int maxcount=0;
+            for(auto it=m.begin();it!=m.end();++it)
+                if(it->second > maxcount)
+                    maxcount=it->second;
+            int substringlength=r-l+1;
+            if(substringlength-maxcount<=k)
+            {
+                cout<<substringlength<<endl;
+                if(substringlength>answer)
+                    answer=substringlength;
+            }
+            else
+            {
+                m[s[l]]--;
+                l++;
+            }
+            ++r;
+        }
+        return answer;
+    }
+};
