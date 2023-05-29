@@ -1,0 +1,18 @@
+Problem Link - https://leetcode.com/problems/reverse-bits/
+
+Solution
+
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        uint32_t answer=0;
+        int c=0;
+        while(c++ <= 32)
+        {
+            if(n%2==1)
+                answer+=pow(2,32-c);
+            n/=2;
+        }
+        return answer;
+    }
+};
