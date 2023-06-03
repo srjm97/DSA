@@ -1,0 +1,37 @@
+Problem Link - https://practice.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1
+
+Solution
+
+class Solution{
+    public:
+    int maxLen(vector<int>&A, int n)
+    {   
+        int answer=0;
+        map<int,int>mp;
+        mp[0]=0;
+        int sum=0;
+        for(int i=0;i<n;++i)
+        {
+            if(mp.find(sum)==mp.end())
+            {
+                mp[sum]=i;
+            }
+            else
+            {
+                auto itr=mp.find(sum);
+                auto val=itr->second;
+                if(i-val>answer)
+                    answer=i-val;
+            }
+            sum+=A[i];
+        }
+        if(mp.find(sum)!=mp.end())
+        {
+            auto itr=mp.find(sum);
+            auto val=itr->second;
+            if(n-val>answer)
+                answer=n-val;
+        }
+        return answer;
+    }
+};
