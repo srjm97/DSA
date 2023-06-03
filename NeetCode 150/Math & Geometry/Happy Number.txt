@@ -1,0 +1,38 @@
+Problem Link - https://leetcode.com/problems/happy-number/description/
+
+Solution
+
+class Solution {
+public:
+    
+    int value(int n)
+    {
+        int sum=0;
+        while(n>0)
+        {
+            int d=n%10;
+            sum+=(d*d);
+            n/=10;
+        }
+        return sum;
+    }
+    
+    bool isHappy(int n) {
+        set<int>s;
+        int prev_size=0;
+        int prev_ele=n;
+        while(true)
+        {
+            cout<<n<<endl;
+            s.insert(n);
+            if(s.size()==prev_size)
+                if(prev_ele==1)
+                    return true;
+                else
+                    return false;
+            prev_size+=1;
+            prev_ele=n;
+            n=value(n);
+        }
+    }
+};
