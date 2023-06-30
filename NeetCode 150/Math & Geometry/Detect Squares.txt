@@ -1,0 +1,48 @@
+Problem Link - https://leetcode.com/problems/detect-squares/description/
+
+Solution
+
+class DetectSquares {
+public:
+    map<vector<int>,int>m;
+    DetectSquares() {
+    }
+    
+    void add(vector<int> point) {
+        m[point]++;
+    }
+    
+    int count(vector<int> point) {
+        int answer=0;
+        for(auto it=m.begin();it!=m.end();++it)
+        {
+            int x = (it->first)[0];
+            int y = (it->first)[1];
+            int c1,c2,c3;
+            c1 = it->second;
+            if (abs(point[0] - x) != abs(point[1] - y) || point[0] == x || point[1] == y)
+    continue;
+            int tmpx = x;
+            int tmpy = point[1];
+            vector<int>tmp;
+            tmp.push_back(tmpx);
+            tmp.push_back(tmpy);
+            c2 = m[tmp];
+            tmpx = point[0];
+            tmpy = y;
+            tmp.clear();
+            tmp.push_back(tmpx);
+            tmp.push_back(tmpy);
+            c3 = m[tmp];
+            answer+= (c1*c2*c3);
+        }
+        return answer;
+    }
+};
+
+/**
+ * Your DetectSquares object will be instantiated and called as such:
+ * DetectSquares* obj = new DetectSquares();
+ * obj->add(point);
+ * int param_2 = obj->count(point);
+ */
