@@ -1,0 +1,36 @@
+Problem Link - https://leetcode.com/problems/koko-eating-bananas/description/
+
+Solution
+
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int answer;
+        int n=piles.size();
+        if(h<n)
+            return -1;
+        int Max=piles[0];
+        for(int element:piles)
+            if(element>Max)
+                Max=element;
+        int Min = 1;
+        while(Min<=Max)
+        {
+            int mid = (Min+Max)/2;
+            long long tmp=0;
+            for(auto element:piles)
+            {
+                if(element%mid!=0)
+                    tmp+=((element/mid)+1);
+                else
+                    tmp+=(element/mid);
+            }
+            if(tmp<=h)
+                Max = mid-1;
+            else
+                Min = mid+1;
+        }
+    	answer=Min;
+        return answer;
+    }
+};
