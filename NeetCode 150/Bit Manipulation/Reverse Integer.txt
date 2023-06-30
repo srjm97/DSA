@@ -1,0 +1,24 @@
+Problem Link - https://leetcode.com/problems/reverse-integer/description/
+
+Solution
+
+
+class Solution {
+public:
+    int reverse(int x) {
+        int intMax = INT_MAX;
+        int intMin = INT_MIN;
+        int answer = 0;
+        while(x)
+        {
+            int digit = x % 10;
+            x = x / 10;
+            if((answer > intMax / 10) || (answer == intMax / 10 && digit >= intMax % 10))
+                return 0;
+            else if((answer < intMin / 10) || (answer == intMin / 10 && digit <= intMin % 10))
+                return 0;
+            answer = (answer * 10 + digit);
+        }
+        return answer;
+    }
+};
