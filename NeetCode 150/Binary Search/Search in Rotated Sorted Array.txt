@@ -1,0 +1,54 @@
+Problem Link - https://leetcode.com/problems/search-in-rotated-sorted-array/description/
+
+Solution
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int l = 0;
+        int r = nums.size()-1;
+        int currMin=nums[0];
+        int minPos=0;
+        while(l<=r)
+        {
+            if(nums[l]<nums[r])
+            {
+                currMin = min(currMin, nums[l]);
+                if(currMin == nums[l])
+                    minPos = l;
+                break;
+            }
+            int mid = (l+r)/2;
+            currMin = min(currMin,nums[mid]);
+            if(currMin == nums[mid])
+                    minPos = mid;
+            if(nums[l]<=nums[mid])
+                l = mid + 1;
+            else
+                r = mid - 1;
+        }
+        int a = 0, b = minPos - 1;
+        int c = minPos, d = nums.size() - 1;
+        while(a<=b)
+        {
+            int mid = (a+b)/2;
+            if(nums[mid]==target)
+                return mid;
+            else if(nums[mid]>target)
+                b = mid - 1;
+            else
+                a = mid + 1;
+        }
+        while(c<=d)
+        {
+            int mid = (c+d)/2;
+            if(nums[mid]==target)
+                return mid;
+            else if(nums[mid]>target)
+                d = mid - 1;
+            else
+                c = mid + 1;
+        }
+        return -1;
+    }
+};
